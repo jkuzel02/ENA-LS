@@ -10,34 +10,68 @@ The first part is aimed at working with GIS data that will be part of the LBS.
 
 The proposed location-based service will:
 
-* Use at least 5 datasets from the official city data portal. You must choose a city that has a data portal, [data.Brno](https://data.brno.cz/):
-  * [Greenery registry — green surfaces](https://data.gov.cz/dataset?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2F44992785%2F541efa42b634116d1a2480a2cfc81bdc) (*Pasport zeleně – plochy zeleně*).
-  * [Major parks and green areas](https://data.gov.cz/dataset?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2F44992785%2F4a98185bf27f80571428335224caf1b3) (*Významné plochy zeleně*).
-  * [Drinking fountains](https://data.brno.cz/datasets/mestobrno::p%C3%ADtka-drinking-fountains) (*Pítka*).
-  * [Street slopes](https://data.gov.cz/datov%C3%A1-sada?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2F44992785%2Fef795a9a3fab0602c8918e38d1f20a34) (*Sklony komunikací*).
-  * [Watercourses](https://data.gov.cz/dataset?iri=https%3A%2F%2Fdata.gov.cz%2Fzdroj%2Fdatov%C3%A9-sady%2F44992785%2F017158621a74c39f2a2fb2eac5472502) (*Vodní toky*).
+* Use at least 5 datasets from the official city data portal. You must choose a city that has a data portal. Since we are focused on Brno, we use datasets of Statutární město Brno - Magistrát města Brna - Otevřená data from [data.Brno](https://data.brno.cz/):
+  * [Chodníky / Sidewalks](https://data.brno.cz/datasets/mestobrno::chodn%C3%ADky-sidewalks/about)
+  * [Přechody / Pedestrian crossings](https://data.brno.cz/datasets/mestobrno::p%C5%99echody-pedestrian-crossings/about)
+  * [Pítka / Drinking fountains](https://data.brno.cz/datasets/mestobrno::p%C3%ADtka-drinking-fountains/about)
+  * [Pasport zeleně - stromy, keře / Greenery registry - trees, bushes](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-stromy-ke%C5%99e-greenery-registry-trees-bushes/about)
+  * [Pasport zeleně - plochy zeleně / Greenery registry - green surfaces](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-plochy-zelen%C4%9B-greenery-registry-green-surfaces/about)
+  * [Pasport zeleně - technické prvky / Greenery registry - technical equipment](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-technick%C3%A9-prvky-greenery-registry-technical-equipment/about)
+  * [Vodní toky / Watercourses](https://data.brno.cz/datasets/mestobrno::vodn%C3%AD-toky-watercourses/about)
+  * [Průměrné aktuální teploty vzduchu / Average air temperaturatures NOVÉ](https://data.brno.cz/datasets/mestobrno::pr%C5%AFm%C4%9Brn%C3%A9-aktu%C3%A1ln%C3%AD-teploty-vzduchu-average-air-temperaturatures-nov%C3%A9/about)
 
 * Use at least 3 other datasets for different sources. Each dataset must have at least 20 features:
-  * [OpenStreetMap pedestrian network](https://download.geofabrik.de/europe/czech-republic.html) for routing, using the Geofabrik Czech Republic extract.
-  * [Copernicus Urban Atlas 2021](https://land.copernicus.eu/en/products/urban-atlas/urban-atlas-2021) land-cover data for the Brno functional urban area.
-  * [Eurostat 2021 population grid](https://ec.europa.eu/eurostat/web/gisco/geodata/population-distribution/population-grids) for broad population context.
+  * [Mobiliář městských částí - Nábytek a vybavení / Municipal furniture](https://gis.brno.cz/ost/edas/public/99620902-b124-46a1-9d96-dd1b03bed311)
+  * [Building footprints / Budovy, layer: 334](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/)
+
+    Obtain the specifically queried data [here](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&uniqueIds=&returnUniqueIdsOnly=false&featureEncoding=esriDefault&f=geojson)
+
+    Save it in the JSON viewer (Ctrl + S) in a GeoJSON.
+
+  * [Elevation contour lines / ZABAGED® – Výškopis – vrstevnice](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/)
+
+    Obtain the specifically queried data [here](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=16.58%2C49.18%2C16.63%2C49.22&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&uniqueIds=&returnUniqueIdsOnly=false&featureEncoding=esriDefault&f=geojson)
+
+    Save it in the JSON viewer (Ctrl + S) in a GeoJSON.
+
+  * Query all pedestrian footways in Brno at [Overpass Turbo](https://overpass-turbo.eu)
+
+    Head over to Overpass Turbo and run the following query:
+
+    ```overpass
+    [out:json][timeout:180];
+
+    area["name"="Brno"]
+        ["boundary"="administrative"]
+        ["admin_level"="8"]->.brno;
+
+    way["highway"="footway"](area.brno);
+
+    out geom;
+
+    ```
+
+    Then just download the data in GeoJSON format via Export button.
 
 * Use at least three data sets created by team members. Each dataset must have at least 20 features. These datasets are primary data sources, not derived from the first two datasets:
+
   * Direct observations of shade along sidewalks, with location and observation time.
+
+    * **Fields:** `obs_id`, `observer`, `date_time`, `shade_pct`, `sky`, `sidewalk_segment_m`, `photo_id`, `notes`. At each station estimate shaded share of the next fixed 10 m of walkable sidewalk. Face the direction of travel and use the same rule.
+    * **Equipment / time:** Phone GPS/camera, shared form; about 2–3 hours for 60 points plus travel. 
+    * **Common errors and controls:** Observer judgment, cloud/time change, GPS drift. Use fixed segment length, same time window, and review photos together.
+
   * Field measurements of air and/or surface temperature, using a documented and consistent method.
+
+    * **Fields:** `obs_id`, `observer`, `date_time`, `air_c`, `surface_c`, `surface_type`, `shade_state`, `sensor_height_m`, `instrument`, `sky`, `notes`. Measure air in shade at a consistent 1.2–1.5 m height; measure surface at a marked material and note shade.
+    * **Equiment / time:** Thermometer; ideally an IR thermometer for surfaces; phone GPS. About 3–4 hours. Record make/model and compare instruments before the walk.
+    * **Common errors and controls:** Sensor heated by sun, IR angle/emissivity, different surfaces, weather changes. Timestamp every record and avoid comparing readings taken hours apart as if simultaneous.
+
   * A field inventory of public resting places, with shared criteria for seating and observed shade.
 
-Verify that each candidate dataset is available and suitable before counting it toward the requirements. Record its source, license, date, CRS, coverage, and actual feature count. Keep observed measurements separate from proxies such as tree cover or land use; those proxies do not directly measure route temperature or shade. See [research.md](../research.md) and [results.md](../results.md) for dataset verification and analysis guidance.
-
-### How to obtain the datasets
-
-1. **Brno datasets:** open each catalogue link above, find its download/distribution section, and download a GIS file such as GeoJSON or GeoPackage. If a catalogue record only describes a service, follow its distribution link and check that the data can be downloaded. Save the original files and note the download date and license.
-2. **OpenStreetMap:** open the [Geofabrik Jihomoravský kraj page](https://download.geofabrik.de/europe/czech-republic/jihomoravsky.html), choose the current `free.gpkg.zip`, unzip it, and add the GeoPackage in QGIS. Use the roads/paths layer and inspect its pedestrian-related attributes. The regional extract is smaller than the whole-Czechia file and covers Brno.
-3. **Urban Atlas:** open the [Copernicus Urban Atlas dataset page](https://land.copernicus.eu/en/products/urban-atlas?tab=datasets), select the Urban Atlas Land Cover/Land Use 2021 product, then use its download option to obtain the Brno functional urban area (FUA code CZ002L2). If prompted, sign in to Copernicus Data Space. Unzip the downloaded package and add its vector layer to QGIS.
-4. **Eurostat population grid:** open the [Eurostat population grids page](https://ec.europa.eu/eurostat/web/gisco/geodata/population-distribution/population-grids), choose the 2021 census grid and download the GeoPackage ZIP. Unzip and open it in QGIS; the grid uses EPSG:3035. Select the cells covering the study area. Read and follow the download/use conditions on the page.
-5. **Team field data:** agree on the observation form and collection method first. Record each observation as a separate feature with a unique ID, location, date/time, and the required measurements or attributes. Export each layer from QGIS as GeoJSON.
-
-For every downloaded or collected dataset, open it in QGIS, check that it appears in the correct place, inspect its attribute table, and record the actual feature count. Keep the original download unchanged; make clipped or cleaned copies for analysis. Ask for help with one source at a time if a download page or QGIS step is confusing.
+    * **Fields:** `site_id`, `observer`, `date_time`, `seat_type`, `seats_n`, `shade_now`, `backrest`, `armrest`, `step_free_approach`, `condition`, `comfort_1_5`, `photo_id`, `notes`. Use a shared definition of public access and a short written 1–5 comfort rubric.
+    * **Equipment / time:** Phone GPS/camera, checklist; about 2–3 hours.
+    * **Common errors and controls:** Subjective comfort and temporary obstructions. Use identical rubric and don’t photograph identifiable people. Expand the pilot if fewer than 20 distinct sites exist.
 
 ## Application Design
 
