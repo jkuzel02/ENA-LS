@@ -1,0 +1,152 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage{fontspec}
+\setmainfont{Latin Modern Roman}
+\setsansfont{Latin Modern Sans}
+\setmonofont{Latin Modern Mono}[Scale=MatchLowercase]
+\usepackage[english]{babel}
+\usepackage[margin=25mm]{geometry}
+\usepackage{enumitem}
+\setlist{itemsep=0.35em,topsep=0.5em}
+\usepackage{xurl}
+\usepackage[unicode,hidelinks]{hyperref}
+\urlstyle{same}
+\providecommand{\tightlist}{\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.6em}
+\setlength{\emergencystretch}{3em}
+\setcounter{secnumdepth}{0}
+\title{CoolRoute Brno - Heat-Aware Pedestrian Navigation}
+\author{}
+\date{}
+\makeatletter
+\renewcommand{\maketitle}{%
+  \begin{center}
+    {\LARGE \@title\par}
+  \end{center}
+}
+\makeatother
+\begin{document}
+\maketitle
+
+\begin{center}
+  \href{https://is.mendelu.cz/auth/lide/clovek.pl?id=100907;}{Dominik Jakubec} (\texttt{xjakubec}), \href{https://is.mendelu.cz/auth/lide/clovek.pl?id=100910;}{Jiří Kužel} (\texttt{xkuzel}), \href{https://is.mendelu.cz/auth/lide/clovek.pl?id=100912;}{Vojtěch Střílka} (\texttt{xstrilka})
+\end{center}
+
+\section{Project description}\label{project-description}
+
+Location-based service that helps pedestrians find walking routes with lower heat exposure during hot weather. The service will compare the shortest walking route with an alternative one that considers visible overhead cover, drinking-water access, places to rest and route steepness.
+
+\section{Data}\label{data}
+
+\subsubsection{Official City Data Portal}
+
+Datasets from the official city data portal (\href{https://data.brno.cz/}{data.brno.cz}):
+
+\begin{itemize}
+  \tightlist
+  \item \href{https://data.brno.cz/datasets/mestobrno::chodn\%C3\%ADky-sidewalks/about}{Chodníky / Sidewalks}
+
+  \item \href{https://data.brno.cz/datasets/mestobrno::pasport-zelen\%C4\%9B-plochy-zelen\%C4\%9B-greenery-registry-green-surfaces/about}{Pasport zeleně - plochy zeleně / Greenery registry - green surfaces}
+  
+  \item \href{https://data.brno.cz/datasets/mestobrno::pasport-zelen\%C4\%9B-stromy-ke\%C5\%99e-greenery-registry-trees-bushes/about}{Pasport zeleně - stromy, keře / Greenery registry - trees, bushes}
+
+  \item \href{https://data.brno.cz/datasets/mestobrno::pasport-zelen\%C4\%9B-technick\%C3\%A9-prvky-greenery-registry-technical-equipment/about}{Pasport zeleně - technické prvky / Greenery registry - technical equipment}
+
+  \item \href{https://data.brno.cz/datasets/mestobrno::p\%C3\%ADtka-drinking-fountains/about}{Pítka / Drinking fountains}
+
+  \item \href{https://data.brno.cz/datasets/mestobrno::p\%C5\%99echody-pedestrian-crossings/about}{Přechody / Pedestrian crossings}
+
+  \item \href{https://data.brno.cz/datasets/mestobrno::vodn\%C3\%AD-toky-watercourses/about}{Vodní toky / Watercourses}
+
+  \item \href{https://datahub.brno.cz/datasets/mestobrno::pr\%C5\%AFm\%C4\%9Brn\%C3\%A9-aktu\%C3\%A1ln\%C3\%AD-teploty-vzduchu-average-air-temperaturatures-nov\%C3\%A9/about}{Průměrné aktuální teploty vzduchu / Average air temperatures NOVÉ}
+
+\end{itemize}
+
+\subsubsection{Different Sources}
+
+Other datasets from different sources:
+
+\begin{itemize}
+  \item \href{https://gis.brno.cz}{gis.brno.cz} -- \href{https://gis.brno.cz/ost/edas/public/99620902-b124-46a1-9d96-dd1b03bed311}{Mobiliář městských částí -- Nábytek a vybavení / Municipal furniture}
+
+  \item \href{https://gis.brno.cz}{gis.brno.cz} -- \href{https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/}{Building footprints / Budovy, layer: 334}
+
+  \item \href{https://ags.cuzk.gov.cz}{ags.cuzk.gov.cz} -- \href{https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/}{Elevation contour lines / ZABAGED® -- Výškopis -- vrstevnice}
+
+  \item \href{https://human-settlement.emergency.copernicus.eu}{human-settlement.emergency.copernicus.eu} -- \href{https://human-settlement.emergency.copernicus.eu/ghs_buH2023.php}{GHS-BUILT-H - R2023A}
+  
+  \item All pedestrian footways in Brno from \href{https://overpass-turbo.eu}{overpass-turbo.eu} -- proposed query:
+
+    \begin{minipage}{\linewidth}
+    \vspace*{12pt}
+    \small
+      \begin{verbatim}
+      [out:json][timeout:180];
+
+      area["name"="Brno"]
+          ["boundary"="administrative"]
+          ["admin_level"="8"]->.brno;
+
+      way["highway"="footway"](area.brno);
+
+      out geom;
+      \end{verbatim}
+    \end{minipage}
+
+\end{itemize}
+
+\clearpage
+
+\subsubsection{Custom Datasets}
+
+Datasets created by team members independently of the datasets mentioned above:
+
+\begin{itemize}
+\item
+  \textbf{Resting objects:} Publicly accessible seating locations, including seating type, presence of a backrest, and visible overhead cover. These locations should help users find places to take a break along a route.
+
+  \textbf{Fields:}
+  
+  \begin{itemize}
+    \item \texttt{id} (long)
+    \item \texttt{date\_time} (datetime)
+    \item \texttt{object\_type} (text -- e.g., bench, chair, picnic table)
+    \item \texttt{backrest} (bool)
+    \item \texttt{covered} (bool)
+    \item \texttt{cover\_type} (text -- e.g., none, trees, roof, mixed)
+    \item \texttt{notes} (text)
+  \end{itemize}
+
+\item
+  \textbf{Public indoor refuges:} Indoor locations where pedestrians can take a break from direct sunlight without making a purchase, such as publicly accessible libraries or shopping centres. The dataset should contain verified opening hours, access restrictions, and seating availability. These locations will be presented as potential refuges from the heat.
+
+  \textbf{Fields:}
+  
+  \begin{itemize}
+    \item \texttt{id} (long)
+    \item \texttt{date\_time} (datetime)
+    \item \texttt{refuge\_type} (text -- e.g., library, shopping centre)
+    \item \texttt{opening\_hours} (text -- e.g., Mon--Fri 09:00--18:00)
+    \item \texttt{access\_restrictions} (text -- e.g., none, registration required)
+    \item \texttt{seating} (bool)
+    \item \texttt{notes} (text)
+  \end{itemize}
+
+\item
+  \textbf{Stair sets:} Distinct publicly accessible stair flights or connected stair sets, with step count, handrail presence, overhead cover, and availability of a step-free alternative. Stairs add physical effort. These records should help users choose less strenuous walking routes during hot weather.
+  
+  \textbf{Fields:}
+
+  \begin{itemize}
+    \item \texttt{id} (long)
+    \item \texttt{date\_time} (datetime)
+    \item \texttt{step\_count} (long)
+    \item \texttt{handrail} (bool)
+    \item \texttt{overhead\_cover} (text -- e.g., none, trees, roof, mixed)
+    \item \texttt{step\_free\_alternative} (text -- e.g., yes, no, unknown)
+    \item \texttt{notes} (text)
+  \end{itemize}
+  
+\end{itemize}
+
+\end{document}

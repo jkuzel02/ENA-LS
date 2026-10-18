@@ -2,76 +2,112 @@
 
 Heat-Aware Pedestrian Navigation in Brno, Czechia
 
-Location-based service that helps pedestrians find walking routes with lower heat exposure during hot weather. It will compare a shortest walking route with an alternative that considers observed shade, drinking-water access, places to rest, and possibly steepness. Present the result as a heat-aware estimate, not a guarantee of the coolest route. Brno is the selected city; a compact central pilot area is a starting option.
+## Team Members
+
+* [Dominik Jakubec](https://is.mendelu.cz/auth/lide/clovek.pl?id=100907;) (`xjakubec`)
+* [Jiří Kužel](https://is.mendelu.cz/auth/lide/clovek.pl?id=100910;) (`xkuzel`)
+* [Vojtěch Střílka](https://is.mendelu.cz/auth/lide/clovek.pl?id=100912;) (`xstrilka`)
+
+## Project Description
+
+Location-based service that helps pedestrians find walking routes with lower heat exposure during hot weather. The service will compare the shortest walking route with an alternative one that considers visible overhead cover, drinking-water access, places to rest and route steepness.
 
 ## Data
 
 The first part is aimed at working with GIS data that will be part of the LBS.
 
-The proposed location-based service will:
+### Official City Data Portal
 
-* Use at least 5 datasets from the official city data portal. You must choose a city that has a data portal. Since we are focused on Brno, we use datasets of Statutární město Brno - Magistrát města Brna - Otevřená data from [data.Brno](https://data.brno.cz/):
-  * [Chodníky / Sidewalks](https://data.brno.cz/datasets/mestobrno::chodn%C3%ADky-sidewalks/about)
-  * [Přechody / Pedestrian crossings](https://data.brno.cz/datasets/mestobrno::p%C5%99echody-pedestrian-crossings/about)
-  * [Pítka / Drinking fountains](https://data.brno.cz/datasets/mestobrno::p%C3%ADtka-drinking-fountains/about)
-  * [Pasport zeleně - stromy, keře / Greenery registry - trees, bushes](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-stromy-ke%C5%99e-greenery-registry-trees-bushes/about)
-  * [Pasport zeleně - plochy zeleně / Greenery registry - green surfaces](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-plochy-zelen%C4%9B-greenery-registry-green-surfaces/about)
-  * [Pasport zeleně - technické prvky / Greenery registry - technical equipment](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-technick%C3%A9-prvky-greenery-registry-technical-equipment/about)
-  * [Vodní toky / Watercourses](https://data.brno.cz/datasets/mestobrno::vodn%C3%AD-toky-watercourses/about)
-  * [Průměrné aktuální teploty vzduchu / Average air temperaturatures NOVÉ](https://data.brno.cz/datasets/mestobrno::pr%C5%AFm%C4%9Brn%C3%A9-aktu%C3%A1ln%C3%AD-teploty-vzduchu-average-air-temperaturatures-nov%C3%A9/about)
+Use at least 5 datasets from the official city data portal.
 
-* Use at least 3 other datasets for different sources. Each dataset must have at least 20 features:
-  * [Mobiliář městských částí - Nábytek a vybavení / Municipal furniture](https://gis.brno.cz/ost/edas/public/99620902-b124-46a1-9d96-dd1b03bed311)
-  * [Building footprints / Budovy, layer: 334](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/)
+Datasets from the official city data portal ([data.brno.cz](https://data.brno.cz/)):
 
-    Obtain the specifically queried data [here](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&uniqueIds=&returnUniqueIdsOnly=false&featureEncoding=esriDefault&f=geojson)
+- [Chodníky / Sidewalks](https://data.brno.cz/datasets/mestobrno::chodn%C3%ADky-sidewalks/about)
+- [Pasport zeleně - plochy zeleně / Greenery registry - green surfaces](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-plochy-zelen%C4%9B-greenery-registry-green-surfaces/about)
+- [Pasport zeleně - stromy, keře / Greenery registry - trees, bushes](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-stromy-ke%C5%99e-greenery-registry-trees-bushes/about)
+- [Pasport zeleně - technické prvky / Greenery registry - technical equipment](https://data.brno.cz/datasets/mestobrno::pasport-zelen%C4%9B-technick%C3%A9-prvky-greenery-registry-technical-equipment/about)
+- [Pítka / Drinking fountains](https://data.brno.cz/datasets/mestobrno::p%C3%ADtka-drinking-fountains/about)
+- [Přechody / Pedestrian crossings](https://data.brno.cz/datasets/mestobrno::p%C5%99echody-pedestrian-crossings/about)
+- [Vodní toky / Watercourses](https://data.brno.cz/datasets/mestobrno::vodn%C3%AD-toky-watercourses/about)
+- [Průměrné aktuální teploty vzduchu / Average air temperatures NOVÉ](https://datahub.brno.cz/datasets/mestobrno::pr%C5%AFm%C4%9Brn%C3%A9-aktu%C3%A1ln%C3%AD-teploty-vzduchu-average-air-temperaturatures-nov%C3%A9/about)
 
-    Save it in the JSON viewer (Ctrl + S) in a GeoJSON.
+### Different Sources
 
-  * [Elevation contour lines / ZABAGED® – Výškopis – vrstevnice](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/)
+Use at least 3 datasets from different sources. Each dataset must have at least 20 features.
 
-    Obtain the specifically queried data [here](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=16.58%2C49.18%2C16.63%2C49.22&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&uniqueIds=&returnUniqueIdsOnly=false&featureEncoding=esriDefault&f=geojson)
+* [Mobiliář městských částí - Nábytek a vybavení / Municipal furniture](https://gis.brno.cz/ost/edas/public/99620902-b124-46a1-9d96-dd1b03bed311)
+* [Building footprints / Budovy, layer: 334](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/)
 
-    Save it in the JSON viewer (Ctrl + S) in a GeoJSON.
+  Obtain the specifically queried data [here](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&uniqueIds=&returnUniqueIdsOnly=false&featureEncoding=esriDefault&f=geojson)
 
-  * Query all pedestrian footways in Brno at [Overpass Turbo](https://overpass-turbo.eu)
+  Save it in the JSON viewer (Ctrl + S) in a GeoJSON.
 
-    Head over to Overpass Turbo and run the following query:
+* [Elevation contour lines / ZABAGED® – Výškopis – vrstevnice](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/)
 
-    ```overpass
-    [out:json][timeout:180];
+  Obtain the specifically queried data [here](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=16.58%2C49.18%2C16.63%2C49.22&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&uniqueIds=&returnUniqueIdsOnly=false&featureEncoding=esriDefault&f=geojson)
 
-    area["name"="Brno"]
-        ["boundary"="administrative"]
-        ["admin_level"="8"]->.brno;
+  Save it in the JSON viewer (Ctrl + S) in a GeoJSON.
 
-    way["highway"="footway"](area.brno);
+* [human-settlement.emergency.copernicus.eu](https://human-settlement.emergency.copernicus.eu) — [GHS-BUILT-H - R2023A](https://human-settlement.emergency.copernicus.eu/ghs_buH2023.php)
 
-    out geom;
+* Query all pedestrian footways in Brno at [Overpass Turbo](https://overpass-turbo.eu)
 
-    ```
+  Head over to Overpass Turbo and run the following query:
 
-    Then just download the data in GeoJSON format via Export button.
+  ```overpass
+  [out:json][timeout:180];
 
-* Use at least three data sets created by team members. Each dataset must have at least 20 features. These datasets are primary data sources, not derived from the first two datasets:
+  area["name"="Brno"]
+      ["boundary"="administrative"]
+      ["admin_level"="8"]->.brno;
 
-  * Direct observations of shade along sidewalks, with location and observation time.
+  way["highway"="footway"](area.brno);
 
-    * **Fields:** `obs_id`, `observer`, `date_time`, `shade_pct`, `sky`, `sidewalk_segment_m`, `photo_id`, `notes`. At each station estimate shaded share of the next fixed 10 m of walkable sidewalk. Face the direction of travel and use the same rule.
-    * **Equipment / time:** Phone GPS/camera, shared form; about 2–3 hours for 60 points plus travel. 
-    * **Common errors and controls:** Observer judgment, cloud/time change, GPS drift. Use fixed segment length, same time window, and review photos together.
+  out geom;
 
-  * Field measurements of air and/or surface temperature, using a documented and consistent method.
+  ```
 
-    * **Fields:** `obs_id`, `observer`, `date_time`, `air_c`, `surface_c`, `surface_type`, `shade_state`, `sensor_height_m`, `instrument`, `sky`, `notes`. Measure air in shade at a consistent 1.2–1.5 m height; measure surface at a marked material and note shade.
-    * **Equiment / time:** Thermometer; ideally an IR thermometer for surfaces; phone GPS. About 3–4 hours. Record make/model and compare instruments before the walk.
-    * **Common errors and controls:** Sensor heated by sun, IR angle/emissivity, different surfaces, weather changes. Timestamp every record and avoid comparing readings taken hours apart as if simultaneous.
+  Then just download the data in GeoJSON format via Export button.
 
-  * A field inventory of public resting places, with shared criteria for seating and observed shade.
+### Custom Datasets
 
-    * **Fields:** `site_id`, `observer`, `date_time`, `seat_type`, `seats_n`, `shade_now`, `backrest`, `armrest`, `step_free_approach`, `condition`, `comfort_1_5`, `photo_id`, `notes`. Use a shared definition of public access and a short written 1–5 comfort rubric.
-    * **Equipment / time:** Phone GPS/camera, checklist; about 2–3 hours.
-    * **Common errors and controls:** Subjective comfort and temporary obstructions. Use identical rubric and don’t photograph identifiable people. Expand the pilot if fewer than 20 distinct sites exist.
+Use at least 3 datasets created by team members. Each dataset must have at least 20 features.
+
+Datasets created by team members independently of the datasets mentioned above:
+
+- **Resting objects:** Publicly accessible seating locations, including seating type, presence of a backrest, and visible overhead cover. These locations should help users find places to take a break along a route.
+
+  **Fields:**
+
+  - `id` (long)
+  - `date_time` (datetime)
+  - `object_type` (text -- e.g., bench, chair, picnic table)
+  - `backrest` (bool)
+  - `covered` (bool)
+  - `cover_type` (text -- e.g., none, trees, roof, mixed)
+  - `notes` (text)
+- **Public indoor refuges:** Indoor locations where pedestrians can take a break from direct sunlight without making a purchase, such as publicly accessible libraries or shopping centres. The dataset should contain verified opening hours, access restrictions, and seating availability. These locations will be presented as potential refuges from the heat.
+
+  **Fields:**
+
+  - `id` (long)
+  - `date_time` (datetime)
+  - `refuge_type` (text -- e.g., library, shopping centre)
+  - `opening_hours` (text -- e.g., Mon--Fri 09:00--18:00)
+  - `access_restrictions` (text -- e.g., none, registration required)
+  - `seating` (bool)
+  - `notes` (text)
+- **Stair sets:** Distinct publicly accessible stair flights or connected stair sets, with step count, handrail presence, overhead cover, and availability of a step-free alternative. Stairs add physical effort. These records should help users choose less strenuous walking routes during hot weather.
+
+  **Fields:**
+
+  - `id` (long)
+  - `date_time` (datetime)
+  - `step_count` (long)
+  - `handrail` (bool)
+  - `overhead_cover` (text -- e.g., none, trees, roof, mixed)
+  - `step_free_alternative` (text -- e.g., yes, no, unknown)
+  - `notes` (text)
 
 ## Application Design
 
