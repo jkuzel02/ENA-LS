@@ -1,3 +1,3 @@
 # ENA-LS (Location-based Services)
 
-Course repository for ENA-LS course
+ENA-LS course repo

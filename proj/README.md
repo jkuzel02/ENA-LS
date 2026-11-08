@@ -4,9 +4,9 @@ Heat-Aware Pedestrian Navigation in Brno, Czechia
 
 ## Team Members
 
-* [Dominik Jakubec](https://is.mendelu.cz/auth/lide/clovek.pl?id=100907;) (`xjakubec`)
-* [Jiří Kužel](https://is.mendelu.cz/auth/lide/clovek.pl?id=100910;) (`xkuzel`)
-* [Vojtěch Střílka](https://is.mendelu.cz/auth/lide/clovek.pl?id=100912;) (`xstrilka`)
+- [Dominik Jakubec](https://is.mendelu.cz/auth/lide/clovek.pl?id=100907;) (`xjakubec`)
+- [Jiří Kužel](https://is.mendelu.cz/auth/lide/clovek.pl?id=100910;) (`xkuzel`)
+- [Vojtěch Střílka](https://is.mendelu.cz/auth/lide/clovek.pl?id=100912;) (`xstrilka`)
 
 ## Project Description
 
@@ -35,22 +35,22 @@ Datasets from the official city data portal ([data.brno.cz](https://data.brno.cz
 
 Use at least 3 datasets from different sources. Each dataset must have at least 20 features.
 
-* [Mobiliář městských částí - Nábytek a vybavení / Municipal furniture](https://gis.brno.cz/ost/edas/public/99620902-b124-46a1-9d96-dd1b03bed311)
-* [Building footprints / Budovy, layer: 334](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/)
+- [Mobiliář městských částí - Nábytek a vybavení / Municipal furniture](https://gis.brno.cz/ost/edas/public/99620902-b124-46a1-9d96-dd1b03bed311)
+- [Building footprints / Budovy, layer: 334](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/)
 
   Obtain the specifically queried data [here](https://gis.brno.cz/ags3/rest/services/PUBLIC/basemap_brno_zakladni_mapa_seda_3D_tiled/MapServer/334/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&uniqueIds=&returnUniqueIdsOnly=false&featureEncoding=esriDefault&f=geojson)
 
   Save it in the JSON viewer (Ctrl + S) in a GeoJSON.
 
-* [Elevation contour lines / ZABAGED® – Výškopis – vrstevnice](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/)
+- [Elevation contour lines / ZABAGED® – Výškopis – vrstevnice](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/)
 
   Obtain the specifically queried data [here](https://ags.cuzk.gov.cz/arcgis/rest/services/ZABAGED_VRSTEVNICE/MapServer/0/query?where=1%3D1&text=&objectIds=&time=&timeRelation=esriTimeRelationOverlaps&geometry=16.58%2C49.18%2C16.63%2C49.22&geometryType=esriGeometryEnvelope&inSR=4326&spatialRel=esriSpatialRelIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=*&returnGeometry=true&returnTrueCurves=false&maxAllowableOffset=&geometryPrecision=&outSR=4326&havingClause=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&historicMoment=&returnDistinctValues=false&resultOffset=&resultRecordCount=&returnExtentOnly=false&sqlFormat=none&datumTransformation=&parameterValues=&rangeValues=&quantizationParameters=&uniqueIds=&returnUniqueIdsOnly=false&featureEncoding=esriDefault&f=geojson)
 
   Save it in the JSON viewer (Ctrl + S) in a GeoJSON.
 
-* [human-settlement.emergency.copernicus.eu](https://human-settlement.emergency.copernicus.eu) — [GHS-BUILT-H - R2023A](https://human-settlement.emergency.copernicus.eu/ghs_buH2023.php)
+- [human-settlement.emergency.copernicus.eu](https://human-settlement.emergency.copernicus.eu) — [GHS-BUILT-H - R2023A](https://human-settlement.emergency.copernicus.eu/ghs_buH2023.php)
 
-* Query all pedestrian footways in Brno at [Overpass Turbo](https://overpass-turbo.eu)
+- Query all pedestrian footways in Brno at [Overpass Turbo](https://overpass-turbo.eu)
 
   Head over to Overpass Turbo and run the following query:
 
@@ -86,6 +86,7 @@ Datasets created by team members independently of the datasets mentioned above:
   - `covered` (bool)
   - `cover_type` (text -- e.g., none, trees, roof, mixed)
   - `notes` (text)
+
 - **Public indoor refuges:** Indoor locations where pedestrians can take a break from direct sunlight without making a purchase, such as publicly accessible libraries or shopping centres. The dataset should contain verified opening hours, access restrictions, and seating availability. These locations will be presented as potential refuges from the heat.
 
   **Fields:**
@@ -115,9 +116,9 @@ The second part is the design of the LBS in Figma. The design can be either a we
 
 The requirements for the application:
 
-* At least 6 screens.
-* Use the data used in the Data part of this assignment.
-* Be available for citizens; this is not an application for city officials.
+- At least 6 screens.
+- Use the data used in the Data part of this assignment.
+- Be available for citizens; this is not an application for city officials.
 
 Possible screens include a map, origin and destination selection, route comparison, route details and score explanation, nearby fountains/resting places, and field observation submission or review.
 
@@ -125,34 +126,33 @@ Possible screens include a map, origin and destination selection, route comparis
 
 The final project will consist of:
 
-* ArcGIS Online map(s) representing the final analysis and project output.
-* A web application showing an ArcGIS Online map, built using Experience Builder.
-* Anything else you want to add (other maps, dashboards, StoryMap, etc.).
-* Datasets in SHP or GeoJSON format.
-* Figma design of the web or mobile application, with a public link to the design.
-* A PowerPoint presentation describing the proposed LBS and the results.
+- ArcGIS Online map(s) representing the final analysis and project output.
+- A web application showing an ArcGIS Online map, built using Experience Builder.
+- Anything else you want to add (other maps, dashboards, StoryMap, etc.).
+- Datasets in SHP or GeoJSON format.
+- Figma design of the web or mobile application, with a public link to the design.
+- A PowerPoint presentation describing the proposed LBS and the results.
 
 ## Schedule
 
-* **2026/10/18 20:00** — Project proposition with the names of the three team members. Include at least 20 lines describing the problem, the idea behind the application, the data used, and how it will benefit citizens.
-  
-  **Build the Project Proposal Doc**:
-
-  Requires XeLaTeX and `latexmk`, plus the LaTeX packages used by the source and the Latin Modern fonts. These can be provided by a TeX Live installation.
-
-  From the repository root:
-
-  ```sh
-  cd proj/proposal
-  latexmk -xelatex -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build main.tex
-  ```
-
-  The PDF is generated at `proj/proposal/build/main.pdf`. Build outputs are ignored by Git and must be generated locally.
-
-* **Week from 2026/10/19** — Mandatory consultation during lecture/seminars; report what has been done so far.
-* **2026/11/08 20:00** — Progress report, mainly describing the data used and the reasoning behind dataset choices.
-* **Week from 2026/11/06** — Mandatory consultation during lecture/seminars; report what has been done so far.
-* **2026/12/07 20:00** — Progress report on work completed since the previous report.
-* **Last week of the semester** — Final project presentations.
+- **2026/10/18 20:00** — Project proposition with the names of the three team members. Include at least 20 lines describing the problem, the idea behind the application, the data used, and how it will benefit citizens.
+- **Week from 2026/10/19** — Mandatory consultation during lecture/seminars; report what has been done so far.
+- **2026/11/08 20:00** — Progress report, mainly describing the data used and the reasoning behind dataset choices.
+- **Week from 2026/11/06** — Mandatory consultation during lecture/seminars; report what has been done so far.
+- **2026/12/07 20:00** — Progress report on work completed since the previous report.
+- **Last week of the semester** — Final project presentations.
 
 > Each report must contain the team-member list and each member’s percentage of work completed on the project so far.
+
+## XeLaTeX Build
+
+Requires XeLaTeX and `latexmk`, plus the LaTeX packages used by the source and the Latin Modern fonts. These can be provided by a TeX Live installation.
+
+From the repository root:
+
+```sh
+cd proj/{dir}
+latexmk -xelatex -interaction=nonstopmode -halt-on-error -file-line-error -outdir=build main.tex
+```
+
+The PDF is generated at `proj/{dir}/build/main.pdf`. Build outputs are ignored by Git and must be generated locally.
